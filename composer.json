@@ -1,8 +1,14 @@
 {
-    "name": "picture-handeling/gallery-by-ylva",
-    "description": "A database connected modell to present images in a gallery",
+    "name": "pic-handle/by-ylva",    
+    "type": "object - model - controller",
+    "description": "Simple picture gallery from database",
+    "keywords": ["picture", "gallery"],
+   
     "require": {
-        "php": "^5.3.3 || ^7.0",
-        "another-vendor/package": "1.*"
+        "php": ">=5.4",
+        "mos/cdatabase": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Phpmvc\\": "src/" }
     }
 }

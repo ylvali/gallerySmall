@@ -1,2 +1,3 @@
-# gallerySmall
-Small object - modell -controller - view gallery to be used in anax-mvcphp
+
+This package needs to be installed with the Anax-phpmvc
+There needs to be a working environment .

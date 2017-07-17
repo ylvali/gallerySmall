@@ -1,5 +1,5 @@
 {
-    "name": "pictureHandeling/gallery-by-ylva",
+    "name": "picture-handeling/gallery-by-ylva",
     "description": "A database connected modell to present images in a gallery",
     "require": {
         "php": "^5.3.3 || ^7.0",

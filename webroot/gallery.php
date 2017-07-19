@@ -4,7 +4,7 @@
 * This is an Anax pagecontroller
 */
 
-//Include the settings
+//Include the settings (anax settings)
 require __DIR__.'/config.php';
 
 // Create services and inject into the app.
@@ -21,7 +21,7 @@ $di->setShared('db', function () {
 //create the $app
 $app = new \Anax\MVC\CApplicationBasic($di);
 
-//Add the gallery controller
+//Add the gallery controller, inject in $di
 $di->set('GalleryController', function () use ($di) {
     $controller = new \Anax\Gallery\GalleryController();
     $controller->setDI($di);
@@ -92,6 +92,8 @@ $app->router->add('setupGallery', function () use ($app) {
             ]);
 
         });
+
+        //Here you should add your own route for displaying the picture gallery in your framework
 
         //Handle
         $app->router->handle();

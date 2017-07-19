@@ -1,51 +1,29 @@
 <?php
 
-    //Initiates/adds value to session array
-    $nmr[] = 0;
-    $this->session->set('nmr', $nmr);
+    //get the session
+    $nrs = $this->session->get('nrs', []);
+    $nrs[] = 0; //add a value of 0
 
-    $nmr = $this->session->get('nmr', []);
+    $pictNr = $nrs[0]; //set the pict nr to first array position
 
-    $count = $nmr[0];
-
-    //Controlls if the form has been sent
-    $value = isset($_GET['move'])? $_GET['move'] : null;
-
-
-    //the user can push 'next' or 'previous'
-    //this adds the reaction of counting and saving into an array
-    $sum = 0;
-    if ($value == "next"){
-        $sum = $count + 1;
-
-        $nmr[0] = $sum;
-        $this->session->set('nmr', $nmr);
-    }
-
-    else if ($value == "previous"){
-        $sum = $count - 1;
-
-        $nmr[0] = $sum;
-        $this->session->set('nmr', $nmr);
-    }
-
-    //the count is saved in a variable
-    $pictNr = $nmr[0];
-
-    //controll the length of the incoming database array
+    //Check the incoming img array size
     $length = sizeOf($img);
     $length = $length - 1;
 
-    //Check so that the count is within the session array spectra
-    //If it goes beyond, it is set to 0
+    //when counter exits the image array spectrum (= there is no image)
+    //the counter nrs is reset
     if ($pictNr > $length || $pictNr < 0){
         $pictNr = 0;
 
-        $nmr[0] = 0;
-        $this->session->set('nmr', $nmr);
+        $nrs[0] = 0;
+        $this->session->set('nrs', $nrs);
     }
-?>
 
+    //The form uses $_POST and uses the function form to determine which
+    //picture to show next
+    //post returns to GalleryController and uses session to keep count.
+
+?>
 
 
 <div class="box3">
@@ -54,12 +32,11 @@
 
     <img src="../<?=$img[$pictNr]?>" alt="image">
 
-
-    <form  method="get">
+    <form  method="post" action="form">
         <input type="submit" value="next" name="move">
     </form>
 
-    <form  method="get">
+    <form  method="post" action="form">
         <input type="submit" value="previous" name="move">
     </form>
 

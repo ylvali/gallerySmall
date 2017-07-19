@@ -1,8 +1,4 @@
 <?php
-/*
-*
-*   You need to have a connection to a database and have that installed in $db
-*/
 namespace Anax\Gallery;
 
 class GalleryController implements \Anax\DI\IInjectionAware
@@ -49,7 +45,7 @@ class GalleryController implements \Anax\DI\IInjectionAware
         }
 
 
-            //The view prints
+            //Lämnar över till vyn att skriva ut galleriet
             $this->theme->setTitle("The gallery");
             $this->views->add('gallery/test', [
                 'items' => $gItems,
@@ -111,6 +107,7 @@ class GalleryController implements \Anax\DI\IInjectionAware
 
 
 
+
     //this function will get all images, it then passes one on to the show
 
     public function getImagesAction()
@@ -123,13 +120,47 @@ class GalleryController implements \Anax\DI\IInjectionAware
             $img[] = $image->img;
         }
 
+
         $this->theme->setTitle("The gallery");
         $this->views->add('gallery/show2', [
             'title' =>"The image show",
             'img' => $img
         ]);
 
+    }
 
+    //this function collects the form value
+    //and saves it to the session memory
+
+    //it is connected to the show view and interplays with it
+    //using an array pocket to calculate which the next picture should be
+
+    public function formAction () {
+
+        $action = isset($_POST['move'])? $_POST['move'] : null;
+
+        $nrs = $this->session->get('nrs', []);
+        $previous = $nrs[0];
+        if ($previous === null) {
+                $previous = 0;
+            }
+
+        //if the next button was hit = 1
+        //if the previous button was hit = 2
+        if ($action === "next") {
+            $nrs[0] = $previous + 1;
+            $this->session->set('nrs', $nrs);
+        } else if ($action === "previous") {
+            $nrs[0] = $previous - 1;
+            $this->session->set('nrs', $nrs);
+
+        } else {
+            $nrs[0] = 0;
+            $this->session->set('nrs', $nrs);
+
+        }
+
+        header("Location:getImages");
 
     }
 }

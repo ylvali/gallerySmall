@@ -12,7 +12,7 @@ It is a simple gallery, when clicking on an image you get to see the big version
 
 There is also the code for flipping through a series of images.
 
-It is a modell - controller based module , each picture in the gallery becomes an object.
+It is a model - controller based module , each picture in the gallery becomes an object.
 The pictures are collected from a list in your database.
 
 You need to have a connection to a database and this album is working from the table 'gallery' in the code right now.
